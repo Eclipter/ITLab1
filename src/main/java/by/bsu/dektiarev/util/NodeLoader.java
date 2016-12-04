@@ -25,7 +25,7 @@ public final class NodeLoader {
             String[] values = stringList.get(0).split(" ");
             return Stream.of(values).map(value -> {
                 String[] parts = value.split(":");
-                return new Pair<>(parts[0], new Node(Double.parseDouble(parts[1])));
+                return new Pair<>(parts[0], new Node(parts[0], Double.parseDouble(parts[1])));
             }).collect(Collectors.toMap(Pair::getKey, Pair::getValue));
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);

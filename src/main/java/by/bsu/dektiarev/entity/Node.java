@@ -7,12 +7,18 @@ import java.util.Objects;
  */
 public class Node implements Comparable<Node> {
 
+    private String symbol;
     private double value;
     private Node parent;
     private Node leftChild;
     private Node rightChild;
 
     public Node(double value) {
+        this.value = value;
+    }
+
+    public Node(String symbol, double value) {
+        this.symbol = symbol;
         this.value = value;
     }
 
@@ -27,12 +33,15 @@ public class Node implements Comparable<Node> {
         if (o == null || getClass() != o.getClass()) return false;
         Node node = (Node) o;
         return Double.compare(node.value, value) == 0 &&
-                Objects.equals(parent, node.parent);
+                Objects.equals(symbol, node.symbol) &&
+                Objects.equals(parent, node.parent) &&
+                Objects.equals(leftChild, node.leftChild) &&
+                Objects.equals(rightChild, node.rightChild);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, parent);
+        return Objects.hash(symbol, value, parent, leftChild, rightChild);
     }
 
     @Override
@@ -42,6 +51,14 @@ public class Node implements Comparable<Node> {
                 ", leftChild=" + leftChild +
                 ", rightChild=" + rightChild +
                 '}';
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     public Node getParent() {
